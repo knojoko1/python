@@ -4,6 +4,10 @@ on:
   push:
     branches: [ main, master ]
 
+# 👇 Add this permissions block to allow GitHub Actions to push commits back
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
