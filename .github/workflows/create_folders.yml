@@ -1,0 +1,23 @@
+name: Auto-Create Repository Folders
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create directories and .gitkeep
+        run: |
+          mkdir -p basics functions oop data_structures scripts
+          touch basics/.gitkeep functions/.gitkeep oop/.gitkeep data_structures/.gitkeep scripts/.gitkeep
+
+      - name: Commit and push if changes exist
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-generated folder structure from workflow"
+          branch: main
